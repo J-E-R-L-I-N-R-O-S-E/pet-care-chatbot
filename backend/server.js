@@ -142,6 +142,14 @@ app.get("/check", (req, res) => {
   res.send("CHECK WORKING ✅");
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    uptime: process.uptime(),
+    timestamp: new Date()
+  });
+});
+
 /**
  * 🌐 SERVE FRONTEND (IMPORTANT FOR DEPLOY)
  */
