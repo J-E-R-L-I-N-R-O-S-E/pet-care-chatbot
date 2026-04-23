@@ -155,6 +155,15 @@ app.get("/health", (req, res) => {
  */
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
+app.get("/api/users", (req, res) => {
+  try {
+    const users = JSON.parse(fs.readFileSync(usersFile));
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Error reading users" });
+  }
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
